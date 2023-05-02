@@ -37,7 +37,7 @@ async def get_name(app, id):
         return name_cache[id]
     else:
         try:
-            i = await app.get_users()
+            i = await app.get_users(id)
             i = f'{(i.first_name or "")} {(i.last_name or "")}'
             name_cache[id] = i
             return i
