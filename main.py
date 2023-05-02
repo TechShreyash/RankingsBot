@@ -51,7 +51,7 @@ async def show_top_today(_, message: Message):
     t = "🔰 **Today's Top Users :**\n\n"
 
     pos = 1
-    for i, k in sorted(chat[today].items()[:10], key=lambda x: x[1], reverse=True):
+    for i, k in sorted(chat[today].items(), key=lambda x: x[1], reverse=True)[:10]:
         i = await get_name(app, i)
 
         t += f"**{pos}.** {i} - {k}\n"
@@ -89,7 +89,7 @@ async def show_top_overall_callback(_, query: CallbackQuery):
                 overall_dict[j] += l
 
     pos = 1
-    for i, k in sorted(overall_dict.items()[:10], key=lambda x: x[1], reverse=True):
+    for i, k in sorted(overall_dict.items(), key=lambda x: x[1], reverse=True)[:10]:
         i = await get_name(app, i)
 
         t += f"**{pos}.** {i} - {k}\n"
@@ -120,7 +120,7 @@ async def show_top_today_callback(_, query: CallbackQuery):
     t = "🔰 **Today's Top Users :**\n\n"
 
     pos = 1
-    for i, k in sorted(chat[today].items()[:10], key=lambda x: x[1], reverse=True):
+    for i, k in sorted(chat[today].items(), key=lambda x: x[1], reverse=True)[:10]:
         i = await get_name(app, i)
 
         t += f"**{pos}.** {i} - {k}\n"
