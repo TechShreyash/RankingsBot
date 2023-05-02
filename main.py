@@ -26,7 +26,6 @@ app = Client(
     ~filters.bot
     & ~filters.forwarded
     & filters.group
-    & ~filters.edited
     & ~filters.via_bot
     & ~filters.service
 )
