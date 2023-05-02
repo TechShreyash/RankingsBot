@@ -66,7 +66,7 @@ async def show_top_today(_, message: Message):
 
 
 @app.on_callback_query(filters.regex("overall"))
-async def show_top_overall(_, query: CallbackQuery):
+async def show_top_overall_callback(_, query: CallbackQuery):
     print("overall top in", query.message.chat.id)
     chat = chatdb.find_one({"chat": query.message.chat.id})
 
@@ -104,7 +104,7 @@ async def show_top_overall(_, query: CallbackQuery):
 
 
 @app.on_callback_query(filters.regex("today"))
-async def show_top_today(_, query: CallbackQuery):
+async def show_top_today_callback(_, query: CallbackQuery):
     print("today top in", query.message.chat.id)
     chat = chatdb.find_one({"chat": query.message.chat.id})
     today = str(date.today())
