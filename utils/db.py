@@ -13,6 +13,8 @@ def increase_count(chat, user):
 
     if not user_db:
         user_db = {}
+    elif not user_db.get(today):
+        user_db = {}
     else:
         user_db = user_db[today]
 
