@@ -22,7 +22,14 @@ app = Client(
 )
 
 
-@app.on_message(~filters.bot & ~filters.forwarded & filters.group)
+@app.on_message(
+    ~filters.bot
+    & ~filters.forwarded
+    & filters.group
+    & ~filters.edited
+    & ~filters.via_bot
+    & ~filters.service
+)
 async def inc_user(_, message: Message):
     if message.text:
         if (
