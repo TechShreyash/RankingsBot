@@ -10,15 +10,12 @@ from pyrogram.types import (
     InlineKeyboardButton,
 )
 
-# chatdb.drop()
-
-
 uvloop.install()
 app = Client(
     "boto",
-    api_id=23636845,
-    api_hash="d757ec9d2b7f09f474947ad3a2befd00",
-    bot_token="6111306063:AAFn1y-hTG8dnewY3MIwCxekJKIgkgj-YtY",
+    api_id="API_ID",
+    api_hash="API_HASH",
+    bot_token="BOT_TOKEN",
 )
 
 
