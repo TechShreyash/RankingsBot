@@ -46,10 +46,16 @@ async def show_top_today(_, message: Message):
     today = str(date.today())
 
     if not chat:
-        return await message.reply_text("no data available")
+        return await message.reply_text("no data available",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Overall Ranking", callback_data="overall")]]
+        ),)
 
     if not chat.get(today):
-        return await message.reply_text("no data available for today")
+        return await message.reply_text("no data available for today",
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Overall Ranking", callback_data="overall")]]
+        ),)
 
     t = "🔰 **Today's Top Users :**\n\n"
 
@@ -59,6 +65,9 @@ async def show_top_today(_, message: Message):
 
         t += f"**{pos}.** {i} - {k}\n"
         pos += 1
+
+    total = sum(chat[today].values())
+    t += f'\n✉️ Today messages: {total}'
 
     await message.reply_text(
         t,
@@ -81,6 +90,7 @@ async def show_top_overall_callback(_, query: CallbackQuery):
     t = "🔰 **Overall Top Users :**\n\n"
 
     overall_dict = {}
+    total =0
     for i, k in chat.items():
         if i == "chat" or i == "_id":
             continue
@@ -91,12 +101,17 @@ async def show_top_overall_callback(_, query: CallbackQuery):
             else:
                 overall_dict[j] += l
 
+         total += sum(k.values())
+    
+
     pos = 1
     for i, k in sorted(overall_dict.items(), key=lambda x: x[1], reverse=True)[:10]:
         i = await get_name(app, i)
 
         t += f"**{pos}.** {i} - {k}\n"
         pos += 1
+
+    t += f'\n✉️ Today messages: {total}'
 
     await query.message.edit_text(
         t,
@@ -128,6 +143,11 @@ async def show_top_today_callback(_, query: CallbackQuery):
 
         t += f"**{pos}.** {i} - {k}\n"
         pos += 1
+
+
+    total = sum(chat[today].values())
+    t += f'\n✉️ Today messages: {total}'
+
 
     await query.message.edit_text(
         t,
