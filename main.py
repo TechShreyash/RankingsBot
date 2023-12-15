@@ -33,12 +33,24 @@ async def inc_user(_, message: Message):
             or message.text.strip() == "/top"
         ):
             return await show_top_today(_, message)
+        if (
+            message.text.strip() == "/start@RankingssBot"
+            or message.text.strip() == "/start"
+        ):
+            return await message.reply_text(
+                "Hi, I am a ranking bot.\n\nI can rank the top 10 users in a chat based on the number of messages they have sent.\n\nClick /top to see the top 10 users in this chat."
+            )
 
     chat = message.chat.id
     user = message.from_user.id
     increase_count(chat, user)
     print(chat, user, "increased")
 
+@app.on_message(filters.private)
+async def start(_, message: Message):
+    await message.reply_text(
+        "Hi, I am a ranking bot.\n\nI can rank the top 10 users in a chat based on the number of messages they have sent.\n\nAdd me to a group and make me admin.\n\nClick /top to see the top 10 users in the chat."
+    )
 
 async def show_top_today(_, message: Message):
     print("today top in", message.chat.id)
