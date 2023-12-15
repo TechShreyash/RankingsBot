@@ -113,7 +113,7 @@ async def show_top_overall_callback(_, query: CallbackQuery):
             else:
                 overall_dict[j] += l
 
-         total += sum(k.values())
+        total += sum(k.values())
     
 
     pos = 1
